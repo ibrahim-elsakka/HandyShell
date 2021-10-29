@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
+  xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap desktop4 desktop5 com rescap">
+	
+  <Identity
+    Name="4da866f7-4bb0-4510-819f-b9a81a62f4cb"
+    Publisher="CN=Mahdi"
+    Version="1.0.0.0" />
+
+  <Properties>
+    <DisplayName>HandyShell</DisplayName>
+    <PublisherDisplayName>Mahdi</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="$targetentrypoint$">
+      <uap:VisualElements
+        DisplayName="HandyShell"
+        Description="HandyShell"
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+		<Extensions>
+			<uap:Extension Category="windows.shareTarget">
+				<uap:ShareTarget>
+					<uap:SupportedFileTypes>
+						<uap:SupportsAnyFileType/>
+					</uap:SupportedFileTypes>
+				</uap:ShareTarget>
+			</uap:Extension>
+			<desktop4:Extension Category="windows.fileExplorerContextMenus">
+				<desktop4:FileExplorerContextMenus>
+					<desktop5:ItemType Type="Directory"  >
+						<desktop5:Verb Id="Command1" Clsid="46F650E5-9959-48D6-AC13-A9637C5B3787" />
+					</desktop5:ItemType>
+					<desktop5:ItemType Type="*"  >
+						<desktop5:Verb Id="Command2" Clsid="46F650E5-9959-48D6-AC13-A9637C5B3787" />
+					</desktop5:ItemType>
+				</desktop4:FileExplorerContextMenus>
+			</desktop4:Extension>
+			<com:Extension Category="windows.comServer">
+				<com:ComServer>
+					<com:SurrogateServer DisplayName="Custom Context Menu">
+						<com:Class Id="46F650E5-9959-48D6-AC13-A9637C5B3787" Path="ContextMenuCustomHost.dll" ThreadingModel="STA"/>
+					</com:SurrogateServer>
+				</com:ComServer>
+			</com:Extension>
+		</Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>
